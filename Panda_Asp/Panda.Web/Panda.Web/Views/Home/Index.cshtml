@@ -1,0 +1,113 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Panda.Models
+@using Panda.Services.Dtos
+@model Panda.Web.Models.Packages.IndexAllPackagesViewModel
+
+@inject SignInManager<PandaUser> SingInManager
+@inject UserManager<PandaUser> UserManager
+
+@if (!SingInManager.IsSignedIn(User))
+{
+    <main class="mt-3">
+        <div class="jumbotron mt-3 bg-panda">
+            <h1 class="text-white">Welcome to PANDA Delivery Services.</h1>
+            <hr class="bg-white hr-2" />
+            <h3 class="text-white"><a href="/Account/login">Login</a> if you have an account.</h3>
+            <h3 class="text-white"><a href="/Account/register">Register</a> if you don't.</h3>
+        </div>
+    </main>
+}
+else
+{
+    if (User.IsInRole("Admin"))
+    {
+        <main class="mt-3">
+            <h1 class="text-center">Hello, Administrator @User.Identity.Name!</h1>
+            <hr class="hr-2 bg-panda">
+            <div class="d-flex justify-content-between">
+                <div class="w-25 bg-white">
+                    <h2 class="text-center">Pending</h2>
+                    <div class="border-panda p-3">
+                        @foreach (var pack in Model.Pending)
+                        {
+                            <div class="p-2 d-flex justify-content-around">
+                                <h4 class="w-75">@pack.Description</h4>
+                                <a asp-controller="Packages" asp-action="Details" asp-route-id="@pack.Id" class="btn bg-panda text-white w-25">Details</a>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div class="w-25 bg-white">
+                    <h2 class="text-center">Shipped</h2>
+                    <div class="border-panda p-3">
+                        @foreach (var pack in Model.Shipped)
+                        {
+                            <div class="p-2 d-flex justify-content-around">
+                                <h4 class="w-75">@pack.Description</h4>
+                                <a asp-controller="Packages" asp-action="Details" asp-route-id="@pack.Id" class="btn bg-panda text-white w-25">Details</a>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div class="w-25 bg-white">
+                    <h2 class="text-center">Delivered</h2>
+                    <div class="border-panda p-3">
+                        @foreach (var pack in Model.Delivered)
+                        {
+                            <div class="p-2 d-flex justify-content-around">
+                                <h4 class="w-75">@pack.Description</h4>
+                                <a asp-controller="Packages" asp-action="Acquire" asp-route-id="@pack.Id" class="btn bg-panda text-white w-25">Acquire</a>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </main>
+    }
+    else
+    {
+        <main class="mt-3">
+            <h1 class="text-center">Hello, @User.Identity.Name!</h1>
+            <hr class="hr-2 bg-panda">
+            <div class="d-flex justify-content-between">
+                <div class="w-25 bg-white">
+                    <h2 class="text-center">Pending</h2>
+                    <div class="border-panda p-3">
+                        @foreach (var pack in Model.Pending)
+                        {
+                            <div class="p-2 d-flex justify-content-around">
+                                <h4 class="w-75">@pack.Description</h4>
+                                <a asp-controller="Packages" asp-action="Details" asp-route-id="@pack.Id" class="btn bg-panda text-white w-25">Details</a>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div class="w-25 bg-white">
+                    <h2 class="text-center">Shipped</h2>
+                    <div class="border-panda p-3">
+                        @foreach (var pack in Model.Shipped)
+                        {
+                            <div class="p-2 d-flex justify-content-around">
+                                <h4 class="w-75">@pack.Description</h4>
+                                <a asp-controller="Packages" asp-action="Details" asp-route-id="@pack.Id" class="btn bg-panda text-white w-25">Details</a>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div class="w-25 bg-white">
+                    <h2 class="text-center">Delivered</h2>
+                    <div class="border-panda p-3">
+                        @foreach (var pack in Model.Delivered)
+                        {
+                            <div class="p-2 d-flex justify-content-around">
+                                <h4 class="w-75">@pack.Description</h4>
+                                <a asp-controller="Packages" asp-action="Acquire" asp-route-id="@pack.Id" class="btn bg-panda text-white w-25">Acquire</a>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </main>
+    }
+}
+

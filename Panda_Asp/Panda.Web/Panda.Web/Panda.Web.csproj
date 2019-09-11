@@ -1,0 +1,42 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <UserSecretsId>aspnet-Panda.Web-D3ECE842-37CD-4CE4-83EC-8A806BC06334</UserSecretsId>
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="Views\Account\login.cshtml" />
+    <Content Remove="Views\Account\register.cshtml" />
+    <Content Remove="Views\Packages\Shipped.cshtml" />
+    <Content Remove="Views\Receipts\All.cshtml" />
+    <Content Remove="Views\Receipts\Details.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Views\Account\Login.cshtml" />
+    <None Include="Views\Account\Register.cshtml" />
+    <None Include="Views\Packages\Shipped.cshtml" />
+    <None Include="Views\Receipts\All.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Views\Receipts\Details.cshtml" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.4" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Panda.Data\Panda.Data.csproj" />
+    <ProjectReference Include="..\..\Panda.Models\Panda.Models.csproj" />
+    <ProjectReference Include="..\..\Panda.Services\Panda.Services.csproj" />
+  </ItemGroup>
+
+</Project>
